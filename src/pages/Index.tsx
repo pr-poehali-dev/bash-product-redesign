@@ -3,7 +3,7 @@ import Icon from "@/components/ui/icon";
 
 type IconName = string;
 
-const HERO_IMAGE = "https://cdn.poehali.dev/projects/303eb9ae-730b-4b91-9067-7b12a1165491/files/5c36e71f-d17f-4b1d-b77e-47d4390ddb69.jpg";
+const HERO_IMAGE = "https://cdn.poehali.dev/projects/303eb9ae-730b-4b91-9067-7b12a1165491/files/5255d4de-f8fd-4305-997e-f2b171b5480e.jpg";
 
 const NAV_LINKS = [
   { label: "Главная", href: "#home" },
@@ -86,10 +86,10 @@ const PRICING_PLANS = [
 ];
 
 const STATS = [
-  { value: "12+", label: "лет на рынке" },
-  { value: "340+", label: "завершённых проектов" },
-  { value: "98%", label: "клиентов возвращаются" },
-  { value: "₽2.4 млрд", label: "создано стоимости" },
+  { value: "100%", label: "органический состав" },
+  { value: "50%", label: "рост урожайности" },
+  { value: "5+", label: "лет на рынке" },
+  { value: "1 000+", label: "довольных клиентов" },
 ];
 
 const SERVICE_TYPES = [
@@ -168,9 +168,9 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-gold flex items-center justify-center">
-              <span className="font-display font-bold text-sm text-background">A</span>
+              <Icon name="Leaf" size={16} className="text-background" />
             </div>
-            <span className="font-display font-semibold text-lg tracking-wide">APEX<span className="text-gold">GROUP</span></span>
+            <span className="font-display font-semibold text-lg tracking-wide">БИО<span className="text-gold">ГУМУС</span></span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
@@ -222,43 +222,96 @@ export default function Index() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${HERO_IMAGE})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
 
+        {/* Subtle grid */}
         <div className="absolute inset-0 opacity-5" style={{
           backgroundImage: "linear-gradient(hsl(var(--border)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px)",
           backgroundSize: "60px 60px"
         }} />
 
-        <div ref={heroSection.ref} className="relative max-w-7xl mx-auto px-6 pt-24 pb-16">
+        {/* Decorative vertical line */}
+        <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gold/5 hidden lg:block" />
+
+        <div ref={heroSection.ref} className="relative max-w-7xl mx-auto px-6 pt-24 pb-16 w-full">
           <div className={`max-w-2xl ${heroSection.inView ? "animate-slide-up" : "opacity-0"}`}>
-            <div className="inline-flex items-center gap-2 px-3 py-1 border border-gold/30 text-gold text-xs font-body font-medium tracking-widest uppercase mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-              Стратегический консалтинг
+
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-gold/40 bg-gold/5 text-gold text-xs font-body font-medium tracking-widest uppercase mb-8">
+              <Icon name="Leaf" size={12} />
+              Башкирский продукт · 100% органика
             </div>
-            <h1 className="font-display text-5xl md:text-7xl font-bold leading-tight uppercase text-foreground mb-6">
-              Решения, которые<br />
-              <span className="text-gold">масштабируют</span><br />
-              ваш бизнес
+
+            <h1 className="font-display text-5xl md:text-7xl font-bold leading-[1.05] uppercase text-foreground mb-4">
+              Конский<br />
+              <span className="text-gold">Биогумус</span>
             </h1>
-            <p className="font-body text-muted-foreground text-lg leading-relaxed mb-10 max-w-xl">
-              Мы помогаем компаниям B2B-сегмента достигать амбициозных целей через стратегический анализ, операционное совершенство и управление изменениями.
+
+            <p className="font-display text-xl md:text-2xl text-muted-foreground/80 font-normal uppercase tracking-wide mb-6">
+              Живое удобрение для богатого урожая
             </p>
-            <div className="flex flex-wrap gap-4">
-              <a href="#contacts" className="px-8 py-3.5 bg-gold text-background font-display font-medium text-sm tracking-wide uppercase hover:opacity-90 transition-opacity">
-                Обсудить проект
+
+            <p className="font-body text-muted-foreground text-base leading-relaxed mb-10 max-w-lg">
+              Экологически чистый продукт переработки конского навоза калифорнийскими червями. Восстанавливает плодородие почвы, увеличивает урожайность до 50% без химии и пестицидов.
+            </p>
+
+            <div className="flex flex-wrap gap-4 mb-14">
+              <a href="#pricing" className="px-8 py-3.5 bg-gold text-background font-display font-medium text-sm tracking-widest uppercase hover:opacity-90 transition-opacity">
+                Посмотреть цены
               </a>
-              <a href="#services" className="px-8 py-3.5 border border-border text-foreground font-display font-medium text-sm tracking-wide uppercase hover:border-gold hover:text-gold transition-colors">
-                Наши услуги
+              <a href="#contacts" className="px-8 py-3.5 border border-border text-foreground font-display font-medium text-sm tracking-widest uppercase hover:border-gold hover:text-gold transition-colors">
+                Заказать
               </a>
+            </div>
+
+            {/* Trust badges */}
+            <div className="flex flex-wrap gap-6">
+              {[
+                { icon: "ShieldCheck", text: "Без химии и ГМО" },
+                { icon: "Sprout", text: "Сертифицировано" },
+                { icon: "Truck", text: "Доставка по России" },
+              ].map(b => (
+                <div key={b.text} className="flex items-center gap-2">
+                  <Icon name={b.icon as IconName} size={14} className="text-gold" />
+                  <span className="font-body text-xs text-muted-foreground">{b.text}</span>
+                </div>
+              ))}
             </div>
           </div>
 
+          {/* Stats */}
           <div className={`mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-border ${heroSection.inView ? "animate-fade-in" : "opacity-0"}`}>
             {STATS.map(stat => (
-              <div key={stat.value} className="bg-card/80 backdrop-blur-sm px-6 py-5">
-                <div className="font-display text-2xl font-bold text-gold">{stat.value}</div>
+              <div key={stat.value} className="bg-card/90 backdrop-blur-sm px-6 py-5">
+                <div className="font-display text-2xl md:text-3xl font-bold text-gold">{stat.value}</div>
                 <div className="font-body text-xs text-muted-foreground mt-1 uppercase tracking-wide">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS — небольшой блок между hero и about */}
+      <section className="py-16 bg-card/20 border-y border-border">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            {[
+              { icon: "Worm", step: "01", title: "Калифорнийские черви", desc: "Перерабатывают конский навоз, создавая богатый гумус" },
+              { icon: "Leaf", step: "02", title: "Натуральный состав", desc: "Гуминовые кислоты, макро- и микроэлементы в доступной форме" },
+              { icon: "Sprout", step: "03", title: "Богатый урожай", desc: "Растения получают всё необходимое без химических удобрений" },
+            ].map(item => (
+              <div key={item.step} className="flex flex-col items-center gap-4">
+                <div className="relative">
+                  <div className="w-14 h-14 border border-gold/30 flex items-center justify-center bg-gold/5">
+                    <Icon name={item.icon as IconName} size={24} className="text-gold" />
+                  </div>
+                  <span className="absolute -top-2 -right-2 font-display text-[10px] font-bold text-background bg-gold px-1.5 py-0.5">{item.step}</span>
+                </div>
+                <div>
+                  <div className="font-display font-semibold uppercase tracking-wide text-sm text-foreground mb-1">{item.title}</div>
+                  <p className="font-body text-xs text-muted-foreground leading-relaxed max-w-xs mx-auto">{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -647,9 +700,9 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 bg-gold flex items-center justify-center">
-              <span className="font-display font-bold text-xs text-background">A</span>
+              <Icon name="Leaf" size={12} className="text-background" />
             </div>
-            <span className="font-display text-sm font-semibold">APEX<span className="text-gold">GROUP</span></span>
+            <span className="font-display text-sm font-semibold">БИО<span className="text-gold">ГУМУС</span></span>
           </div>
           <p className="font-body text-xs text-muted-foreground">© 2024 Apex Group. Все права защищены.</p>
           <div className="flex gap-6">
