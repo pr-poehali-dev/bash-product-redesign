@@ -15,34 +15,40 @@ const NAV_LINKS = [
 
 const SERVICES = [
   {
-    icon: "BarChart3",
-    title: "Стратегический консалтинг",
-    desc: "Разработка долгосрочных стратегий роста, анализ рынка и конкурентного окружения для устойчивого развития бизнеса.",
+    icon: "Package",
+    title: "Биогумус сухой, 5 л",
+    desc: "Универсальное удобрение для дачи и огорода. Удобная фасовка для небольших участков. Срок хранения — 3 года.",
+    badge: "Хит продаж",
   },
   {
-    icon: "Settings2",
-    title: "Операционная оптимизация",
-    desc: "Реинжиниринг бизнес-процессов, автоматизация и внедрение эффективных операционных моделей.",
+    icon: "Package2",
+    title: "Биогумус сухой, 10 л",
+    desc: "Оптимальный объём для садового участка. Подходит для грядок, кустарников и плодовых деревьев.",
+    badge: "",
   },
   {
-    icon: "TrendingUp",
-    title: "Финансовое моделирование",
-    desc: "Построение финансовых моделей, оценка инвестиций и управление рисками для принятия обоснованных решений.",
+    icon: "Archive",
+    title: "Биогумус сухой, 40 л",
+    desc: "Экономичная упаковка для больших огородов и фермерских хозяйств. Максимальная выгода при покупке.",
+    badge: "Выгодно",
   },
   {
-    icon: "Users",
-    title: "Трансформация команды",
-    desc: "Развитие лидерских компетенций, построение высокоэффективных команд и корпоративной культуры.",
+    icon: "Droplets",
+    title: "Биогумус жидкий, 0.5 л",
+    desc: "Концентрированный жидкий экстракт для полива и опрыскивания. Быстрое усвоение растениями.",
+    badge: "",
   },
   {
-    icon: "Globe",
-    title: "Выход на новые рынки",
-    desc: "Анализ зарубежных рынков, локализация бизнес-модели и сопровождение международной экспансии.",
+    icon: "FlaskConical",
+    title: "Биогумус жидкий, 1 л",
+    desc: "Универсальный концентрат для регулярных подкормок. Разводится водой 1:10, подходит для любых культур.",
+    badge: "",
   },
   {
-    icon: "Shield",
-    title: "Управление рисками",
-    desc: "Комплексная оценка операционных и стратегических рисков, разработка систем раннего предупреждения.",
+    icon: "Truck",
+    title: "Оптовые поставки",
+    desc: "Поставки биогумуса оптом для агрохозяйств, тепличных комплексов и садовых центров. Индивидуальные условия.",
+    badge: "Опт",
   },
 ];
 
@@ -365,23 +371,28 @@ export default function Index() {
       <section id="services" className="py-24 bg-card/30">
         <div ref={servicesSection.ref} className="max-w-7xl mx-auto px-6">
           <div className={`text-center mb-16 ${servicesSection.inView ? "animate-fade-in" : "opacity-0"}`}>
-            <div className="text-xs text-gold font-body font-medium tracking-widest uppercase mb-4">Наши услуги</div>
+            <div className="text-xs text-gold font-body font-medium tracking-widest uppercase mb-4">Наша продукция</div>
             <h2 className="font-display text-4xl md:text-5xl font-bold uppercase text-foreground mb-4">
-              Комплексные решения<br />для вашего бизнеса
+              Биогумус для любых<br />культур и масштабов
             </h2>
             <div className="w-12 h-0.5 bg-gold mx-auto" />
           </div>
 
           <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border ${servicesSection.inView ? "animate-fade-in" : "opacity-0"}`}>
             {SERVICES.map(svc => (
-              <div key={svc.title} className="bg-card p-8 hover-lift group cursor-pointer">
+              <div key={svc.title} className="bg-card p-8 hover-lift group cursor-pointer relative">
+                {svc.badge && (
+                  <span className="absolute top-4 right-4 bg-gold text-background text-[10px] font-display font-semibold px-2 py-0.5 uppercase tracking-wider">
+                    {svc.badge}
+                  </span>
+                )}
                 <div className="w-10 h-10 border border-gold/30 flex items-center justify-center mb-6 group-hover:bg-gold/10 transition-colors">
                   <Icon name={svc.icon as IconName} size={20} className="text-gold" />
                 </div>
                 <h3 className="font-display font-semibold uppercase tracking-wide text-foreground text-sm mb-3">{svc.title}</h3>
                 <p className="font-body text-muted-foreground text-sm leading-relaxed">{svc.desc}</p>
                 <div className="mt-6 flex items-center gap-2 text-gold text-xs font-body font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span>Подробнее</span>
+                  <span>Заказать</span>
                   <Icon name="ArrowRight" size={12} />
                 </div>
               </div>
