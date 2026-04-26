@@ -269,26 +269,47 @@ export default function Index() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="py-24 bg-background">
+      <section id="about" className="py-24 bg-background overflow-hidden">
         <div ref={aboutSection.ref} className="max-w-7xl mx-auto px-6">
-          <div className={`grid md:grid-cols-2 gap-16 items-center ${aboutSection.inView ? "animate-fade-in" : "opacity-0"}`}>
+
+          {/* Hero banner */}
+          <div className={`relative mb-16 rounded-sm overflow-hidden ${aboutSection.inView ? "animate-fade-in" : "opacity-0"}`}>
+            <img
+              src="https://cdn.poehali.dev/projects/303eb9ae-730b-4b91-9067-7b12a1165491/files/8b7793cd-fa91-4aa7-9c03-6227e01690e9.jpg"
+              alt="Биогумус — Башкирский продукт"
+              className="w-full h-64 md:h-80 object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50 to-transparent" />
+            <div className="absolute inset-0 flex items-center px-8 md:px-14">
+              <div>
+                <h2 className="font-display text-4xl md:text-6xl font-bold text-foreground uppercase leading-none">
+                  Био<span className="text-gold">гумус</span>
+                </h2>
+                <p className="font-body text-sm md:text-base text-muted-foreground mt-2 max-w-sm leading-relaxed">
+                  Конский «Башкирский продукт»
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className={`grid md:grid-cols-2 gap-16 items-start ${aboutSection.inView ? "animate-fade-in" : "opacity-0"}`}>
             <div>
-              <div className="text-xs text-gold font-body font-medium tracking-widest uppercase mb-4">О компании</div>
-              <h2 className="font-display text-4xl md:text-5xl font-bold uppercase leading-tight text-foreground gold-line mb-8">
-                Экспертиза,<br />проверенная<br />результатами
-              </h2>
+              <div className="text-xs text-gold font-body font-medium tracking-widest uppercase mb-4">О продукте</div>
+              <h3 className="font-display text-3xl md:text-4xl font-bold uppercase leading-tight text-foreground gold-line mb-8">
+                Экологически чистое<br />органическое<br />удобрение
+              </h3>
               <p className="font-body text-muted-foreground leading-relaxed mb-6">
-                Apex Group — ведущая консалтинговая компания, специализирующаяся на стратегическом развитии и операционной трансформации крупных B2B-предприятий. С 2012 года мы сопровождаем компании в ключевые моменты роста.
+                Биогумус — продукт переработки конского навоза калифорнийскими червями. Создаёт плодородие земель и влияет на качество и урожай сельскохозяйственной продукции.
               </p>
               <p className="font-body text-muted-foreground leading-relaxed mb-8">
-                Наша команда из 80+ сертифицированных экспертов объединяет глубокую отраслевую экспертизу с передовыми методологиями управления, обеспечивая измеримые и устойчивые результаты.
+                Подходит для овощных, плодовых, ягодных и декоративно-цветочных культур. Абсолютно безопасен для людей, животных и окружающей среды.
               </p>
               <div className="grid grid-cols-2 gap-6">
                 {[
-                  { icon: "Award", text: "Top-10 консультантов России" },
-                  { icon: "CheckCircle2", text: "ISO 9001 сертификация" },
-                  { icon: "Briefcase", text: "20+ отраслей" },
-                  { icon: "Star", text: "NPS 94 балла" },
+                  { icon: "Leaf", text: "100% органический состав" },
+                  { icon: "Shield", text: "Без химии и пестицидов" },
+                  { icon: "Sprout", text: "Повышает урожайность" },
+                  { icon: "MapPin", text: "Производство Башкирия" },
                 ].map(item => (
                   <div key={item.text} className="flex items-center gap-3">
                     <Icon name={item.icon as IconName} size={16} className="text-gold flex-shrink-0" />
@@ -298,19 +319,43 @@ export default function Index() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { num: "01", title: "Диагностика", desc: "Глубокий анализ текущего состояния бизнеса и выявление точек роста" },
-                { num: "02", title: "Стратегия", desc: "Разработка чёткого плана с измеримыми KPI и сроками реализации" },
-                { num: "03", title: "Внедрение", desc: "Сопровождение команды на всех этапах трансформации" },
-                { num: "04", title: "Результат", desc: "Контроль эффективности и закрепление достигнутых изменений" },
-              ].map(item => (
-                <div key={item.num} className="bg-card border border-border p-6 hover-lift">
-                  <div className="font-display text-3xl font-bold text-gold/20 mb-3">{item.num}</div>
-                  <div className="font-display font-semibold text-foreground uppercase text-sm tracking-wide mb-2">{item.title}</div>
-                  <p className="font-body text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+            <div className="space-y-4">
+              {/* What is it */}
+              <div className="bg-card border border-border p-6 hover-lift">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-8 h-8 border border-gold/30 flex items-center justify-center">
+                    <Icon name="FlaskConical" size={15} className="text-gold" />
+                  </div>
+                  <div className="font-display font-semibold text-foreground uppercase text-sm tracking-wide">Что такое биогумус?</div>
                 </div>
-              ))}
+                <p className="font-body text-xs text-muted-foreground leading-relaxed">
+                  Биогумус — это продукт жизнедеятельности дождевых (калифорнийских) червей, переработавших конский навоз. Богат гуминовыми кислотами, макро- и микроэлементами.
+                </p>
+              </div>
+
+              <div className="bg-card border border-border p-6 hover-lift">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-8 h-8 border border-gold/30 flex items-center justify-center">
+                    <Icon name="Sprout" size={15} className="text-gold" />
+                  </div>
+                  <div className="font-display font-semibold text-foreground uppercase text-sm tracking-wide">Для чего применять?</div>
+                </div>
+                <p className="font-body text-xs text-muted-foreground leading-relaxed">
+                  Для подкормки овощей, ягод, плодовых деревьев, цветов и комнатных растений. Улучшает структуру почвы, ускоряет рост и повышает иммунитет растений.
+                </p>
+              </div>
+
+              <div className="bg-card border border-border p-6 hover-lift">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-8 h-8 border border-gold/30 flex items-center justify-center">
+                    <Icon name="Star" size={15} className="text-gold" />
+                  </div>
+                  <div className="font-display font-semibold text-foreground uppercase text-sm tracking-wide">Преимущества</div>
+                </div>
+                <p className="font-body text-xs text-muted-foreground leading-relaxed">
+                  Увеличивает урожайность до 30–50%, ускоряет прорастание семян, улучшает вкус и качество плодов, восстанавливает истощённые почвы.
+                </p>
+              </div>
             </div>
           </div>
         </div>
