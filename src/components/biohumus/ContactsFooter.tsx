@@ -120,13 +120,12 @@ export default function ContactsFooter() {
       {/* FOOTER */}
       <footer className="border-t border-border py-10 bg-background">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-gold flex items-center justify-center">
-              <Icon name="Leaf" size={12} className="text-background" />
-            </div>
-            <span className="font-display text-sm font-semibold">БИО<span className="text-gold">ГУМУС</span></span>
-          </div>
-          <p className="font-body text-xs text-muted-foreground">© 2024 Apex Group. Все права защищены.</p>
+          <img
+            src="https://cdn.poehali.dev/projects/303eb9ae-730b-4b91-9067-7b12a1165491/bucket/a1edf7d8-4bca-4621-aace-a1169d3c9f43.jpg"
+            alt="Башкирская органика & продукция"
+            className="h-8 w-auto object-contain brightness-[5] contrast-50 invert"
+          />
+          <p className="font-body text-xs text-muted-foreground">© 2025 Башкирская органика & продукция. Все права защищены.</p>
           <div className="flex gap-6">
             {NAV_LINKS.map(l => (
               <a key={l.href} href={l.href} className="font-body text-xs text-muted-foreground hover:text-gold transition-colors">{l.label}</a>
