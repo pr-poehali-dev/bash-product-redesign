@@ -26,9 +26,9 @@ export default function NavBar() {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#home" className="flex items-center">
           <img
-            src="https://cdn.poehali.dev/projects/303eb9ae-730b-4b91-9067-7b12a1165491/bucket/a1edf7d8-4bca-4621-aace-a1169d3c9f43.jpg"
+            src="https://cdn.poehali.dev/projects/303eb9ae-730b-4b91-9067-7b12a1165491/bucket/046f9e26-8153-46e8-81c4-83a45fc6c670.png"
             alt="Башкирская органика & продукция"
-            className="h-10 w-auto object-contain brightness-[5] contrast-50 invert"
+            className="h-10 w-auto object-contain"
           />
         </a>
 
