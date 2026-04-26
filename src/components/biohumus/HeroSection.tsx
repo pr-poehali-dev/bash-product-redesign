@@ -25,10 +25,11 @@ export default function HeroSection() {
         <div ref={heroSection.ref} className="relative max-w-7xl mx-auto px-6 pt-24 pb-16 w-full">
           <div className={`max-w-2xl ${heroSection.inView ? "animate-slide-up" : "opacity-0"}`}>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-gold/40 bg-gold/5 text-gold text-xs font-body font-medium tracking-widest uppercase mb-8">
-              <Icon name="Leaf" size={12} />
-              Башкирский продукт · 100% органика
-            </div>
+            <img
+              src="https://cdn.poehali.dev/projects/303eb9ae-730b-4b91-9067-7b12a1165491/bucket/046f9e26-8153-46e8-81c4-83a45fc6c670.png"
+              alt="Башкирская органика & продукция"
+              className="h-24 md:h-32 w-auto object-contain mb-8"
+            />
 
             <h1 className="font-display text-5xl md:text-7xl font-bold leading-[1.05] uppercase text-foreground mb-4">
               Конский<br />
