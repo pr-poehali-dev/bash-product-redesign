@@ -621,25 +621,53 @@ export default function Index() {
             <div>
               <div className="text-xs text-gold font-body font-medium tracking-widest uppercase mb-4">Контакты</div>
               <h2 className="font-display text-4xl md:text-5xl font-bold uppercase leading-tight text-foreground gold-line mb-8">
-                Начнём работу<br />над вашим<br />проектом
+                Заказать<br />биогумус<br />сейчас
               </h2>
               <p className="font-body text-muted-foreground leading-relaxed mb-10">
-                Свяжитесь с нами для получения бесплатной предварительной консультации. Расскажите о своей задаче — мы предложим оптимальное решение.
+                Свяжитесь с нами любым удобным способом — ответим быстро, поможем выбрать нужный продукт и объём, организуем доставку по всей России.
               </p>
-              <div className="space-y-5">
-                {[
-                  { icon: "Phone", label: "+7 (495) 000-00-00" },
-                  { icon: "Mail", label: "info@apexgroup.ru" },
-                  { icon: "MapPin", label: "Москва, Пресненская набережная, 10" },
-                  { icon: "Clock", label: "Пн–Пт, 9:00–19:00" },
-                ].map(c => (
-                  <div key={c.label} className="flex items-center gap-4">
-                    <div className="w-9 h-9 border border-border flex items-center justify-center flex-shrink-0">
-                      <Icon name={c.icon as IconName} size={15} className="text-gold" />
-                    </div>
-                    <span className="font-body text-sm text-muted-foreground">{c.label}</span>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Icon name="Phone" size={15} className="text-gold" />
                   </div>
-                ))}
+                  <div>
+                    <div className="font-body text-xs text-muted-foreground uppercase tracking-wide mb-1">Телефон</div>
+                    <a href="tel:+79639008585" className="font-body text-sm text-foreground hover:text-gold transition-colors block">+7 (963) 900-85-85</a>
+                    <a href="tel:+79193350101" className="font-body text-sm text-foreground hover:text-gold transition-colors block">+7 (919) 335-01-01</a>
+                    <a href="tel:+79273088585" className="font-body text-sm text-foreground hover:text-gold transition-colors block">+7 (927) 308-85-85</a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Icon name="Mail" size={15} className="text-gold" />
+                  </div>
+                  <div>
+                    <div className="font-body text-xs text-muted-foreground uppercase tracking-wide mb-1">E-mail</div>
+                    <a href="mailto:rbbiohumus@mail.ru" className="font-body text-sm text-foreground hover:text-gold transition-colors">rbbiohumus@mail.ru</a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Icon name="MapPin" size={15} className="text-gold" />
+                  </div>
+                  <div>
+                    <div className="font-body text-xs text-muted-foreground uppercase tracking-wide mb-1">Адрес</div>
+                    <p className="font-body text-sm text-foreground leading-relaxed">453837, Республика Башкортостан,<br />ул. Сельхозтехника, дом 18/1</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Icon name="Users" size={15} className="text-gold" />
+                  </div>
+                  <div>
+                    <div className="font-body text-xs text-muted-foreground uppercase tracking-wide mb-1">ВКонтакте</div>
+                    <a href="https://vk.com/rbbiohumus" target="_blank" rel="noopener noreferrer" className="font-body text-sm text-foreground hover:text-gold transition-colors">vk.com/rbbiohumus</a>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -647,23 +675,23 @@ export default function Index() {
               <h3 className="font-display font-semibold uppercase tracking-wide text-sm text-foreground mb-6">Оставить заявку</h3>
               <div className="space-y-4">
                 <div>
-                  <label className="font-display text-xs uppercase tracking-widest text-muted-foreground block mb-2">Имя и должность</label>
+                  <label className="font-display text-xs uppercase tracking-widest text-muted-foreground block mb-2">Ваше имя</label>
                   <input
                     type="text"
                     value={contactForm.name}
                     onChange={e => setContactForm(p => ({ ...p, name: e.target.value }))}
                     className="w-full bg-background border border-border px-4 py-3 font-body text-sm text-foreground focus:outline-none focus:border-gold transition-colors"
-                    placeholder="Иван Иванов, CEO"
+                    placeholder="Иван Иванов"
                   />
                 </div>
                 <div>
-                  <label className="font-display text-xs uppercase tracking-widest text-muted-foreground block mb-2">Компания</label>
+                  <label className="font-display text-xs uppercase tracking-widest text-muted-foreground block mb-2">Регион доставки</label>
                   <input
                     type="text"
                     value={contactForm.company}
                     onChange={e => setContactForm(p => ({ ...p, company: e.target.value }))}
                     className="w-full bg-background border border-border px-4 py-3 font-body text-sm text-foreground focus:outline-none focus:border-gold transition-colors"
-                    placeholder="ООО Ваша компания"
+                    placeholder="Москва, Краснодар, Уфа..."
                   />
                 </div>
                 <div>
