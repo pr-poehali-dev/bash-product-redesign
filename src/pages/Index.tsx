@@ -54,41 +54,32 @@ const SERVICES = [
 
 const PRICING_PLANS = [
   {
-    name: "Базовый",
-    price: "180 000",
-    period: "/ месяц",
-    features: [
-      "До 3 проектов в работе",
-      "Еженедельные отчёты",
-      "Выделенный менеджер",
-      "Поддержка в рабочее время",
+    category: "Сухой биогумус",
+    icon: "Package",
+    items: [
+      { name: "5 литров", price: "290", unit: "за упаковку" },
+      { name: "10 литров", price: "490", unit: "за упаковку" },
+      { name: "40 литров", price: "1 490", unit: "за упаковку", badge: "Выгодно" },
     ],
     highlight: false,
   },
   {
-    name: "Профессиональный",
-    price: "450 000",
-    period: "/ месяц",
-    features: [
-      "До 10 проектов в работе",
-      "Ежедневные отчёты",
-      "Команда экспертов",
-      "Поддержка 24/7",
-      "Стратегические сессии",
+    category: "Жидкий биогумус",
+    icon: "Droplets",
+    items: [
+      { name: "0.5 литра", price: "190", unit: "за флакон" },
+      { name: "1 литр", price: "320", unit: "за флакон", badge: "Хит" },
+      { name: "5 литров", price: "1 200", unit: "за канистру" },
     ],
     highlight: true,
   },
   {
-    name: "Корпоративный",
-    price: "По запросу",
-    period: "",
-    features: [
-      "Неограниченные проекты",
-      "Персональная команда",
-      "Прямой доступ к партнёрам",
-      "Поддержка 24/7",
-      "Полная интеграция в процессы",
-      "SLA-гарантии",
+    category: "Оптовые поставки",
+    icon: "Truck",
+    items: [
+      { name: "от 100 кг", price: "от 35", unit: "₽ за кг" },
+      { name: "от 500 кг", price: "от 28", unit: "₽ за кг" },
+      { name: "от 1 тонны", price: "По запросу", unit: "" },
     ],
     highlight: false,
   },
@@ -503,37 +494,53 @@ export default function Index() {
       <section id="pricing" className="py-24 bg-card/30">
         <div ref={pricingSection.ref} className="max-w-6xl mx-auto px-6">
           <div className={`text-center mb-16 ${pricingSection.inView ? "animate-fade-in" : "opacity-0"}`}>
-            <div className="text-xs text-gold font-body font-medium tracking-widest uppercase mb-4">Тарифы</div>
+            <div className="text-xs text-gold font-body font-medium tracking-widest uppercase mb-4">Цены</div>
             <h2 className="font-display text-4xl md:text-5xl font-bold uppercase text-foreground mb-4">
-              Прозрачное<br />ценообразование
+              Прозрачные цены<br />на всю продукцию
             </h2>
             <div className="w-12 h-0.5 bg-gold mx-auto" />
           </div>
 
           <div className={`grid md:grid-cols-3 gap-px bg-border ${pricingSection.inView ? "animate-fade-in" : "opacity-0"}`}>
             {PRICING_PLANS.map(plan => (
-              <div key={plan.name} className={`bg-card p-8 flex flex-col ${plan.highlight ? "relative" : ""}`}>
+              <div key={plan.category} className={`bg-card p-8 flex flex-col ${plan.highlight ? "relative" : ""}`}>
                 {plan.highlight && <div className="absolute top-0 left-0 right-0 h-0.5 bg-gold" />}
                 {plan.highlight && (
                   <div className="absolute -top-3 left-8">
-                    <span className="bg-gold text-background text-[10px] font-display font-semibold px-3 py-1 uppercase tracking-wider">Популярный</span>
+                    <span className="bg-gold text-background text-[10px] font-display font-semibold px-3 py-1 uppercase tracking-wider">Популярное</span>
                   </div>
                 )}
-                <div className="mb-6">
-                  <h3 className="font-display font-semibold uppercase tracking-widest text-xs text-muted-foreground mb-4">{plan.name}</h3>
-                  <div className="font-display text-4xl font-bold text-foreground">
-                    {plan.price === "По запросу" ? <span className="text-2xl">По запросу</span> : <>₽ {plan.price}</>}
+
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-9 h-9 border border-gold/30 flex items-center justify-center">
+                    <Icon name={plan.icon as IconName} size={17} className="text-gold" />
                   </div>
-                  {plan.period && <div className="font-body text-sm text-muted-foreground mt-1">{plan.period}</div>}
+                  <h3 className="font-display font-semibold uppercase tracking-wide text-foreground text-sm">{plan.category}</h3>
                 </div>
-                <div className="space-y-3 mb-8 flex-1">
-                  {plan.features.map(f => (
-                    <div key={f} className="flex items-start gap-3">
-                      <Icon name="Check" size={14} className="text-gold mt-0.5 flex-shrink-0" />
-                      <span className="font-body text-sm text-muted-foreground">{f}</span>
+
+                <div className="space-y-3 flex-1 mb-8">
+                  {plan.items.map(item => (
+                    <div key={item.name} className="flex items-center justify-between py-3 border-b border-border/50">
+                      <div className="flex items-center gap-2">
+                        <span className="font-body text-sm text-foreground">{item.name}</span>
+                        {item.badge && (
+                          <span className="bg-gold/15 text-gold text-[10px] font-display font-semibold px-1.5 py-0.5 uppercase tracking-wide">{item.badge}</span>
+                        )}
+                      </div>
+                      <div className="text-right">
+                        {item.price === "По запросу" ? (
+                          <span className="font-body text-xs text-muted-foreground">По запросу</span>
+                        ) : (
+                          <>
+                            <span className="font-display font-bold text-gold text-lg">₽ {item.price}</span>
+                            {item.unit && <div className="font-body text-[10px] text-muted-foreground">{item.unit}</div>}
+                          </>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>
+
                 <a
                   href="#contacts"
                   className={`block text-center px-6 py-3 font-display font-medium text-sm tracking-wide uppercase transition-colors ${
@@ -542,11 +549,15 @@ export default function Index() {
                       : "border border-border text-foreground hover:border-gold hover:text-gold"
                   }`}
                 >
-                  Выбрать план
+                  Заказать
                 </a>
               </div>
             ))}
           </div>
+
+          <p className={`text-center font-body text-xs text-muted-foreground mt-8 ${pricingSection.inView ? "animate-fade-in" : "opacity-0"}`}>
+            * Цены указаны с учётом НДС. Доставка рассчитывается отдельно. Скидки при крупных заказах.
+          </p>
         </div>
       </section>
 
