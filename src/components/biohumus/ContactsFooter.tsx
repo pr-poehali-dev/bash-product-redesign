@@ -59,7 +59,7 @@ export default function ContactsFooter() {
                   </div>
                   <div>
                     <div className="font-body text-xs text-muted-foreground uppercase tracking-wide mb-1">ВКонтакте</div>
-                    <a href="https://vk.com/rbbiohumus" target="_blank" rel="noopener noreferrer" className="font-body text-sm text-foreground hover:text-gold transition-colors">https://vk.com/bashproduct02</a>
+                    <a href="https://vk.com/bashproduct02" target="_blank" rel="noopener noreferrer" className="font-body text-sm text-foreground hover:text-gold transition-colors">vk.com/bashproduct02</a>
                   </div>
                 </div>
               </div>
