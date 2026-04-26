@@ -1,27 +1,36 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
-import { PRICING_PLANS, SERVICE_TYPES, useInView, type IconName } from "./constants";
+import { PRICING_PLANS, useInView, type IconName } from "./constants";
+
+const PRODUCTS = [
+  { id: "dry5",    label: "Сухой, 5 л",     price: 290,   unit: "уп" },
+  { id: "dry10",   label: "Сухой, 10 л",    price: 490,   unit: "уп" },
+  { id: "dry40",   label: "Сухой, 40 л",    price: 1490,  unit: "уп" },
+  { id: "liq05",   label: "Жидкий, 0.5 л",  price: 190,   unit: "фл" },
+  { id: "liq1",    label: "Жидкий, 1 л",    price: 320,   unit: "фл" },
+  { id: "liq5",    label: "Жидкий, 5 л",    price: 1200,  unit: "кан" },
+];
+
+const DELIVERY_OPTIONS = [
+  { id: "pickup", label: "Самовывоз",      cost: 0 },
+  { id: "rf",     label: "Почта России",   cost: 350 },
+  { id: "sdek",   label: "СДЭК",           cost: 450 },
+  { id: "company",label: "Транспортная компания", cost: 0, note: "по тарифу" },
+];
 
 export default function PricingCalculator() {
   const pricingSection = useInView();
   const calcSection = useInView();
 
-  const [selectedService, setSelectedService] = useState("strategy");
-  const [employees, setEmployees] = useState(100);
-  const [revenue, setRevenue] = useState(200);
-  const [duration, setDuration] = useState(6);
+  const [selectedProduct, setSelectedProduct] = useState("dry10");
+  const [qty, setQty] = useState(5);
+  const [selectedDelivery, setSelectedDelivery] = useState("pickup");
 
-  const calcPrice = () => {
-    const svc = SERVICE_TYPES.find(s => s.id === selectedService)!;
-    const empFactor = 1 + Math.log10(employees / 10) * 0.3;
-    const revFactor = 1 + Math.log10(revenue / 10) * 0.2;
-    const monthly = Math.round((svc.base * empFactor * revFactor) / 10000) * 10000;
-    const total = monthly * duration;
-    const roi = Math.round(revenue * 1000000 * 0.08 * (duration / 12));
-    return { monthly, total, roi };
-  };
-
-  const { monthly, total, roi } = calcPrice();
+  const product = PRODUCTS.find(p => p.id === selectedProduct)!;
+  const delivery = DELIVERY_OPTIONS.find(d => d.id === selectedDelivery)!;
+  const subtotal = product.price * qty;
+  const deliveryCost = delivery.cost;
+  const total = subtotal + deliveryCost;
   const fmt = (n: number) => n.toLocaleString("ru-RU");
 
   return (
@@ -30,94 +39,125 @@ export default function PricingCalculator() {
       <section id="calculator" className="py-24 bg-background">
         <div ref={calcSection.ref} className="max-w-5xl mx-auto px-6">
           <div className={`text-center mb-12 ${calcSection.inView ? "animate-fade-in" : "opacity-0"}`}>
-            <div className="text-xs text-gold font-body font-medium tracking-widest uppercase mb-4">Калькулятор стоимости</div>
+            <div className="text-xs text-gold font-body font-medium tracking-widest uppercase mb-4">Калькулятор заказа</div>
             <h2 className="font-display text-4xl md:text-5xl font-bold uppercase text-foreground mb-4">
-              Рассчитайте стоимость<br />вашего проекта
+              Рассчитайте стоимость<br />вашего заказа
             </h2>
             <div className="w-12 h-0.5 bg-gold mx-auto" />
           </div>
 
           <div className={`grid md:grid-cols-5 gap-px bg-border ${calcSection.inView ? "animate-fade-in" : "opacity-0"}`}>
+            {/* Left: inputs */}
             <div className="md:col-span-3 bg-card p-8 space-y-8">
+
+              {/* Product select */}
               <div>
-                <label className="font-display text-xs uppercase tracking-widest text-muted-foreground block mb-3">Тип услуги</label>
+                <label className="font-display text-xs uppercase tracking-widest text-muted-foreground block mb-3">Выберите продукт</label>
                 <div className="grid grid-cols-2 gap-2">
-                  {SERVICE_TYPES.map(s => (
+                  {PRODUCTS.map(p => (
                     <button
-                      key={s.id}
-                      onClick={() => setSelectedService(s.id)}
+                      key={p.id}
+                      onClick={() => setSelectedProduct(p.id)}
                       className={`px-4 py-2.5 text-xs font-body font-medium text-left border transition-colors ${
-                        selectedService === s.id
+                        selectedProduct === p.id
                           ? "border-gold bg-gold/10 text-gold"
                           : "border-border text-muted-foreground hover:border-gold/50 hover:text-foreground"
                       }`}
                     >
-                      {s.label}
+                      {p.label}
+                      <span className="block font-display font-bold mt-0.5">₽ {fmt(p.price)}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
+              {/* Quantity */}
               <div>
                 <div className="flex justify-between items-center mb-3">
-                  <label className="font-display text-xs uppercase tracking-widest text-muted-foreground">Сотрудников</label>
-                  <span className="font-display font-semibold text-gold text-lg">{employees.toLocaleString("ru-RU")}</span>
+                  <label className="font-display text-xs uppercase tracking-widest text-muted-foreground">Количество</label>
+                  <span className="font-display font-semibold text-gold text-lg">{qty} {product.unit}</span>
                 </div>
-                <input type="range" min={10} max={5000} step={10} value={employees} onChange={e => setEmployees(+e.target.value)} className="w-full" />
+                <input
+                  type="range"
+                  min={1} max={100} step={1}
+                  value={qty}
+                  onChange={e => setQty(+e.target.value)}
+                  className="w-full"
+                />
                 <div className="flex justify-between text-xs text-muted-foreground mt-1 font-body">
-                  <span>10</span><span>5 000</span>
+                  <span>1</span><span>100</span>
                 </div>
               </div>
 
+              {/* Delivery */}
               <div>
-                <div className="flex justify-between items-center mb-3">
-                  <label className="font-display text-xs uppercase tracking-widest text-muted-foreground">Выручка (млн ₽/год)</label>
-                  <span className="font-display font-semibold text-gold text-lg">{revenue.toLocaleString("ru-RU")}</span>
-                </div>
-                <input type="range" min={10} max={5000} step={10} value={revenue} onChange={e => setRevenue(+e.target.value)} className="w-full" />
-                <div className="flex justify-between text-xs text-muted-foreground mt-1 font-body">
-                  <span>10 млн</span><span>5 000 млн</span>
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between items-center mb-3">
-                  <label className="font-display text-xs uppercase tracking-widest text-muted-foreground">Длительность (месяцев)</label>
-                  <span className="font-display font-semibold text-gold text-lg">{duration} мес</span>
-                </div>
-                <input type="range" min={1} max={24} step={1} value={duration} onChange={e => setDuration(+e.target.value)} className="w-full" />
-                <div className="flex justify-between text-xs text-muted-foreground mt-1 font-body">
-                  <span>1 мес</span><span>24 мес</span>
+                <label className="font-display text-xs uppercase tracking-widest text-muted-foreground block mb-3">Способ доставки</label>
+                <div className="space-y-2">
+                  {DELIVERY_OPTIONS.map(d => (
+                    <button
+                      key={d.id}
+                      onClick={() => setSelectedDelivery(d.id)}
+                      className={`w-full flex items-center justify-between px-4 py-3 text-xs font-body border transition-colors ${
+                        selectedDelivery === d.id
+                          ? "border-gold bg-gold/10 text-gold"
+                          : "border-border text-muted-foreground hover:border-gold/50 hover:text-foreground"
+                      }`}
+                    >
+                      <span className="font-medium">{d.label}</span>
+                      <span className="font-display font-bold">
+                        {d.cost === 0 ? (d.note ?? "Бесплатно") : `₽ ${fmt(d.cost)}`}
+                      </span>
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
 
+            {/* Right: result */}
             <div className="md:col-span-2 bg-card p-8 flex flex-col justify-between">
               <div>
-                <div className="font-display text-xs uppercase tracking-widest text-muted-foreground mb-6">Расчёт стоимости</div>
+                <div className="font-display text-xs uppercase tracking-widest text-muted-foreground mb-6">Итого к оплате</div>
+
                 <div className="space-y-5">
                   <div className="pb-4 border-b border-border">
-                    <div className="font-body text-xs text-muted-foreground mb-1">Ежемесячно</div>
-                    <div className="font-display text-3xl font-bold text-foreground">₽ {fmt(monthly)}</div>
+                    <div className="font-body text-xs text-muted-foreground mb-1">Продукт</div>
+                    <div className="font-display font-semibold text-foreground text-sm">{product.label}</div>
                   </div>
+
                   <div className="pb-4 border-b border-border">
-                    <div className="font-body text-xs text-muted-foreground mb-1">Итого за {duration} мес</div>
-                    <div className="font-display text-2xl font-semibold text-foreground">₽ {fmt(total)}</div>
+                    <div className="font-body text-xs text-muted-foreground mb-1">Стоимость продукции</div>
+                    <div className="font-display text-2xl font-bold text-foreground">₽ {fmt(subtotal)}</div>
+                    <div className="font-body text-xs text-muted-foreground mt-1">
+                      {qty} {product.unit} × ₽ {fmt(product.price)}
+                    </div>
                   </div>
-                  <div className="pb-4 border-b border-border/50">
-                    <div className="font-body text-xs text-muted-foreground mb-1">Ожидаемый эффект</div>
-                    <div className="font-display text-2xl font-bold text-gold">₽ {fmt(roi)}</div>
-                    <div className="font-body text-xs text-muted-foreground mt-1">+{Math.round(roi / total * 100)}% ROI</div>
+
+                  <div className="pb-4 border-b border-border">
+                    <div className="font-body text-xs text-muted-foreground mb-1">Доставка</div>
+                    <div className="font-display text-lg font-semibold text-foreground">
+                      {deliveryCost === 0
+                        ? (delivery.note ? delivery.note : "Бесплатно")
+                        : `₽ ${fmt(deliveryCost)}`}
+                    </div>
+                  </div>
+
+                  <div className="pb-2">
+                    <div className="font-body text-xs text-muted-foreground mb-1">Итого</div>
+                    <div className="font-display text-3xl font-bold text-gold">
+                      {delivery.note ? `от ₽ ${fmt(subtotal)}` : `₽ ${fmt(total)}`}
+                    </div>
                   </div>
                 </div>
+
                 <div className="mt-6 p-4 bg-gold/5 border border-gold/20">
                   <p className="font-body text-xs text-muted-foreground leading-relaxed">
-                    * Расчёт является предварительным. Точная стоимость определяется после диагностики.
+                    * Стоимость доставки транспортной компанией рассчитывается отдельно по вашему региону.
                   </p>
                 </div>
               </div>
+
               <a href="#contacts" className="mt-8 block text-center px-6 py-3.5 bg-gold text-background font-display font-medium text-sm tracking-wide uppercase hover:opacity-90 transition-opacity">
-                Получить предложение
+                Оформить заказ
               </a>
             </div>
           </div>
