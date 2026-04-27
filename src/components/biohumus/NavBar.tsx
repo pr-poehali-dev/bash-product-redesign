@@ -25,8 +25,8 @@ export default function NavBar() {
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 backdrop-blur-md bg-background/90">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gold flex items-center justify-center">
-            <Icon name="Leaf" size={16} className="text-background" />
+          <div className="w-10 h-10 flex items-center justify-center">
+            <img src="https://cdn.poehali.dev/projects/303eb9ae-730b-4b91-9067-7b12a1165491/bucket/3f7f6571-e92a-43af-b541-1440c6beee32.png" alt="logo" className="w-10 h-10 object-contain" />
           </div>
           <span className="font-display font-semibold text-lg tracking-wide">БИО<span className="text-gold">ГУМУС</span></span>
         </div>
