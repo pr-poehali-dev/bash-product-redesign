@@ -122,7 +122,7 @@ export default function ContactsFooter() {
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 bg-gold flex items-center justify-center">
-              <Icon name="Leaf" size={12} className="text-background" />
+              <img src="https://cdn.poehali.dev/projects/303eb9ae-730b-4b91-9067-7b12a1165491/bucket/3f7f6571-e92a-43af-b541-1440c6beee32.png" alt="logo" className="w-4 h-4 object-contain brightness-0" />
             </div>
             <span className="font-display text-sm font-semibold">БИО<span className="text-gold">ГУМУС</span></span>
           </div>
