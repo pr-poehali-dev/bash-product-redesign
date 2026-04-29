@@ -3,12 +3,12 @@ import Icon from "@/components/ui/icon";
 import { PRICING_PLANS, useInView, type IconName } from "./constants";
 
 const PRODUCTS = [
-  { id: "dry5",    label: "Сухой, 5 л",     price: 290,   unit: "уп" },
-  { id: "dry10",   label: "Сухой, 10 л",    price: 490,   unit: "уп" },
-  { id: "dry40",   label: "Сухой, 40 л",    price: 1490,  unit: "уп" },
-  { id: "liq05",   label: "Жидкий, 0.5 л",  price: 190,   unit: "фл" },
-  { id: "liq1",    label: "Жидкий, 1 л",    price: 320,   unit: "фл" },
-  { id: "liq5",    label: "Жидкий, 5 л",    price: 1200,  unit: "кан" },
+  { id: "dry5",    label: "Сухой, 5 л",     price: 100,   unit: "уп" },
+  { id: "dry10",   label: "Сухой, 10 л",    price: 200,   unit: "уп" },
+  { id: "dry40",   label: "Сухой, 40 л",    price: 800,   unit: "уп" },
+  { id: "liq05",   label: "Жидкий, 0.5 л",  price: 10,    unit: "фл" },
+  { id: "liq1",    label: "Жидкий, 1 л",    price: 20,    unit: "фл" },
+  { id: "liq5",    label: "Жидкий, 5 л",    price: 100,   unit: "кан" },
 ];
 
 const DELIVERY_OPTIONS = [
