@@ -76,9 +76,9 @@ export const PRICING_PLANS = [
     category: "Оптовые поставки",
     icon: "Truck",
     items: [
-      { name: "от 100 кг", price: "от 35", unit: "₽ за кг" },
-      { name: "от 500 кг", price: "от 28", unit: "₽ за кг" },
-      { name: "от 1 тонны", price: "По запросу", unit: "" },
+      { name: "от 100 кг", price: "18", unit: "₽ за литр" },
+      { name: "от 500 кг", price: "18", unit: "₽ за литр" },
+      { name: "от 1 тонны", price: "18", unit: "₽ за литр" },
     ],
     highlight: false,
   },
