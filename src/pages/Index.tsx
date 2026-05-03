@@ -4,6 +4,7 @@ import AboutServices from "@/components/biohumus/AboutServices";
 import PricingCalculator from "@/components/biohumus/PricingCalculator";
 import Reviews from "@/components/biohumus/Reviews";
 import ContactsFooter from "@/components/biohumus/ContactsFooter";
+import IOSInstallBanner from "@/components/biohumus/IOSInstallBanner";
 
 export default function Index() {
   return (
@@ -14,6 +15,7 @@ export default function Index() {
       <PricingCalculator />
       <Reviews />
       <ContactsFooter />
+      <IOSInstallBanner />
     </div>
   );
 }
