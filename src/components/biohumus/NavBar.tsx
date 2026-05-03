@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 import { NAV_LINKS } from "./constants";
+import { usePWAInstall } from "@/hooks/usePWAInstall";
 
 export default function NavBar() {
   const [activeSection, setActiveSection] = useState("home");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { canInstall, install } = usePWAInstall();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,6 +47,15 @@ export default function NavBar() {
               {link.label}
             </a>
           ))}
+          {canInstall && (
+            <button
+              onClick={install}
+              className="flex items-center gap-2 px-4 py-2 border border-gold/50 text-gold font-body text-sm hover:bg-gold/10 transition-colors"
+            >
+              <Icon name="Download" size={14} />
+              Установить приложение
+            </button>
+          )}
           <a href="#contacts" className="ml-4 px-5 py-2 bg-gold text-background font-display font-medium text-sm tracking-wide hover:opacity-90 transition-opacity">
             Связаться
           </a>
@@ -70,6 +81,15 @@ export default function NavBar() {
               {link.label}
             </a>
           ))}
+          {canInstall && (
+            <button
+              onClick={install}
+              className="flex items-center gap-2 text-sm font-body text-gold"
+            >
+              <Icon name="Download" size={14} />
+              Установить приложение
+            </button>
+          )}
         </div>
       )}
     </nav>
